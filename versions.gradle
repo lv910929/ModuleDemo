@@ -1,0 +1,134 @@
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+
+def versions = [:]
+versions.android_gradle_plugin = "3.0.1"
+versions.kotlin = "1.1.51"
+versions.support = "27.0.2"
+versions.multidex = "1.0.2"
+versions.constraint_layout = "1.0.2"
+versions.glide = "3.8.0"
+versions.rxjava = "1.1.6"
+versions.rx_android = "1.2.1"
+versions.retrofit = "2.0.2"
+versions.event_bus = "3.1.1"
+versions.photo_view = "2.0.0"
+versions.persistent_cookie = "v1.0.1"
+versions.gson = "2.8.2"
+versions.flow_layout = "1.0.3"
+versions.swipe_recycler = "1.1.3"
+versions.easy_recycler = "4.4.2"
+versions.permission = "1.1.2"
+versions.utils = "1.10.0"
+versions.top_snackbar = "1.1.1"
+versions.logger = "1.15"
+versions.material_dialog = "0.9.6.0"
+versions.TopToastBar = "1.1.4"
+versions.SuperTextView = "1.1.2"
+versions.swipebackhelper = "3.1.2"
+versions.statusbarutil = "1.4.0"
+versions.okhttp = "3.4.1"
+versions.progress_activity = "2.0.5"
+versions.materialicons = "1.0.2"
+versions.OpeningStartAnimation = "1.0.0"
+//Arouter
+versions.arouter_compiler = "1.1.4"
+versions.arouter_api = "1.3.1"
+//butterknife
+versions.butterknife = "8.8.1"
+
+
+def deps = [:]
+
+def support = [:]
+support.annotations = "com.android.support:support-annotations:$versions.support"
+support.app_compat = "com.android.support:appcompat-v7:$versions.support"
+support.v13 = "com.android.support:support-v13:$versions.support"
+support.percent = "com.android.support:percent:$versions.support"
+support.recyclerview = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview = "com.android.support:cardview-v7:$versions.support"
+support.design = "com.android.support:design:$versions.support"
+support.v4 = "com.android.support:support-v4:$versions.support"
+support.core_utils = "com.android.support:support-core-utils:$versions.support"
+support.multidex = "com.android.support:multidex:$versions.multidex"
+deps.support = support
+
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.adapter = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okhttp"
+okhttp.logger = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+deps.okhttp = okhttp
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+def butterknife = [:]
+butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
+butterknife.android_support_compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
+deps.butterknife = butterknife
+
+//view
+deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+deps.flow_layout = "com.zhy:flowlayout-lib:$versions.flow_layout"
+deps.swipe_recycler = "com.yanzhenjie:recyclerview-swipe:$versions.swipe_recycler"
+deps.easy_recycler = "com.jude:easyrecyclerview:$versions.easy_recycler"
+deps.photo_view = "com.github.chrisbanes:PhotoView:$versions.photo_view"
+deps.material_dialog = "com.afollestad.material-dialogs:core:$versions.material_dialog"
+deps.TopToastBar = "com.github.SwiftyWang:TopToastBar:$versions.TopToastBar"
+deps.SuperTextView = "com.github.lygttpod:SuperTextView:$versions.SuperTextView"
+deps.swipebackhelper = "com.jude:swipebackhelper:$versions.swipebackhelper"
+deps.statusbarutil = "com.jaeger.statusbarutil:library:$versions.statusbarutil"
+deps.progress_activity = "com.github.vlonjatg:progress-activity:$versions.progress_activity"
+deps.materialicons = "com.malinskiy:materialicons:$versions.materialicons"
+deps.OpeningStartAnimation = "site.gemus:openingstartanimation:$versions.OpeningStartAnimation"
+
+//rxjava
+deps.rxjava = "io.reactivex:rxjava:$versions.rxjava"
+deps.rx_android = "io.reactivex:rxandroid:$versions.rx_android"
+
+//other
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.event_bus = "org.greenrobot:eventbus:$versions.event_bus"
+deps.persistent_cookie = "com.github.franmontiel:PersistentCookieJar:$versions.persistent_cookie"
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.permission = "com.yanzhenjie:permission:$versions.permission"
+deps.utils = "com.blankj:utilcode:$versions.utils"
+deps.top_snackbar ="com.androidadvance:topsnackbar:$versions.top_snackbar"
+deps.logger = "com.orhanobut:logger:$versions.logger"
+
+//arouter
+deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
+deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 19
+build_versions.target_sdk = 27
+build_versions.build_tools = "27.0.2"
+ext.build_versions = build_versions
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    //Add the JitPack repository
+    handler.maven { url "https://jitpack.io" }
+    handler.maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+}
+
+ext.addRepos = this.&addRepos

@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Common</string>
+
+    <string name="current_internet_invalid">当前网络未连接</string>
+    <string name="internet_base_url_null">baseUrl不能为空</string>
+
+    <!--loading-->
+    <string name="loading">载入中···</string>
+
+    <!--EasyRecyclerView库的公用布局-->
+    <string name="more_loading">加载中…</string>
+    <string name="no_more">没有更多了</string>
+    <string name="load_error_resume">加载出错，点击重试</string>
+    <string name="more">更多</string>
+    <string name="no_data">暂无数据</string>
+
+    <string name="no_install_qq">请先安装QQ</string>
+    <string name="no_install_wb">请先安装微博</string>
+
+    <!-- 状态布局提示语 -->
+    <string name="no_data_hint">抱歉,暂无数据</string>
+    <string name="error_data_hint">好像您的网络出了点问题</string>
+
+    <!-- 没有更多 -->
+    <string name="no_more_string">没有更多了</string>
+
+    <!-- 网络相关 -->
+    <string name="net_fail_hint">网络出问题啦</string>
+    <string name="get_data_fail">获取数据失败</string>
+    <string name="load_data_fail">加载失败,请稍后再试</string>
+    <string name="no_network_warn">请检查网络设置</string>
+
+    <!-- 权限 -->
+    <string name="intent_permission_hint">您未打开应用权限，是否需要到设置界面打开权限？</string>
+    <string name="camera_permission_hint">扫描二维码需要打开相机和闪光灯的权限</string>
+
+    <!-- validation -->
+    <string name="default_required_validation_message">不能为空</string>
+    <string name="default_required_length_message_min_max">长度必须在 %1$d 和 %2$d 之间.</string>
+    <string name="default_required_length_message_min">长度不能低于 %1$d.</string>
+    <string name="default_required_length_message_max">长度不能超过 %1$d.</string>
+    <string name="default_regex_validation_message">输入格式不正确.</string>
+    <string name="confirm_password_error">两次密码输入不一致</string>
+
+</resources>

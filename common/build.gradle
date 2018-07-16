@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0.0"
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            zipAlignEnabled false
+            shrinkResources false
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    // Support libraries
+    api deps.support.app_compat
+    api deps.support.v4
+    api deps.support.v13
+    api deps.support.design
+    api deps.support.cardview
+    api deps.support.percent
+    api deps.support.recyclerview
+    api deps.constraint_layout
+
+    // RxJava and retrofit
+    api deps.rx_android
+    api deps.rxjava
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
+    api deps.retrofit.adapter
+    api deps.persistent_cookie
+    api deps.okhttp.runtime
+    api deps.okhttp.logger
+
+    // other
+    api deps.kotlin.stdlib
+    api deps.event_bus
+    api deps.gson
+    api deps.permission
+    api deps.utils
+    api deps.glide
+
+    //view
+    api deps.photo_view
+    api deps.easy_recycler
+    api deps.material_dialog
+    api deps.logger
+    api deps.TopToastBar
+    api deps.SuperTextView
+    api deps.swipebackhelper
+    api deps.statusbarutil
+    api deps.progress_activity
+    api deps.materialicons
+    api deps.OpeningStartAnimation
+
+    //router
+    api deps.arouter_api
+
+    //butterknife
+    api deps.butterknife.runtime
+
+    //annotationProcessor
+    annotationProcessor deps.butterknife.android_support_compiler
+
+}
+

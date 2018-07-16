@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/image_error_item"
+        android:layout_width="@dimen/state_image_size"
+        android:layout_height="@dimen/state_image_size" />
+
+    <TextView
+        android:id="@+id/text_error_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="@color/grey600"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/button_retry"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:elevation="2dp"
+        android:text="重试"
+        android:textColor="@color/white" />
+
+</LinearLayout>

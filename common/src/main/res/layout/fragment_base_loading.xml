@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vlonjatg.progressactivity.ProgressRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:progressActivity="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/base_progress_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    progressActivity:emptyBackgroundColor="#FFFFFF"
+    progressActivity:emptyContentTextColor="#616161"
+    progressActivity:emptyTitleTextColor="#616161"
+    progressActivity:errorBackgroundColor="#FFFFFF"
+    progressActivity:errorButtonTextColor="#FFFFFF"
+    progressActivity:errorContentTextColor="#616161"
+    progressActivity:errorTitleTextColor="#616161"
+    progressActivity:loadingBackgroundColor="#FFFFFF">
+
+</com.vlonjatg.progressactivity.ProgressRelativeLayout>
