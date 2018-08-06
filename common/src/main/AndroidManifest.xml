@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lv.common">
@@ -35,7 +36,9 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application>
-
-
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
     </application>
+
 </manifest>

@@ -34,6 +34,9 @@ versions.okhttp = "3.4.1"
 versions.progress_activity = "2.0.5"
 versions.materialicons = "1.0.2"
 versions.OpeningStartAnimation = "1.0.0"
+versions.ahbottomnavigation = "2.0.6"
+versions.AvatarImageView = "1.0.3"
+versions.VasSonic = "3.0.0"
 //Arouter
 versions.arouter_compiler = "1.1.4"
 versions.arouter_api = "1.3.1"
@@ -93,6 +96,12 @@ deps.statusbarutil = "com.jaeger.statusbarutil:library:$versions.statusbarutil"
 deps.progress_activity = "com.github.vlonjatg:progress-activity:$versions.progress_activity"
 deps.materialicons = "com.malinskiy:materialicons:$versions.materialicons"
 deps.OpeningStartAnimation = "site.gemus:openingstartanimation:$versions.OpeningStartAnimation"
+deps.ahbottomnavigation = "com.aurelhubert:ahbottomnavigation:$versions.ahbottomnavigation"
+//联系人头像控件
+deps.AvatarImageView = "cn.carbs.android:AvatarImageView:$versions.AvatarImageView"
+//VasSonic
+deps.VasSonic = "com.tencent.sonic:sdk:$versions.VasSonic"
+
 
 //rxjava
 deps.rxjava = "io.reactivex:rxjava:$versions.rxjava"

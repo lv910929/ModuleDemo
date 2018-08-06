@@ -70,6 +70,9 @@ dependencies {
     api deps.progress_activity
     api deps.materialicons
     api deps.OpeningStartAnimation
+    api deps.ahbottomnavigation
+    api deps.AvatarImageView
+    api deps.VasSonic
 
     //router
     api deps.arouter_api
@@ -78,7 +81,7 @@ dependencies {
     api deps.butterknife.runtime
 
     //annotationProcessor
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     annotationProcessor deps.butterknife.android_support_compiler
 
 }
-

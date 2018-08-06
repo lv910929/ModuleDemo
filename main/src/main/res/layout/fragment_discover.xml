@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.DiscoverFragment">
+
+    <include layout="@layout/toolbar_comm" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- 需要加载的统一加入这个布局 -->
+        <RelativeLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progress_web_view"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:progressDrawable="@drawable/progressbar_bg"
+                android:visibility="gone" />
+
+            <WebView
+                android:id="@+id/web_view_discover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/progress_web_view" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/state_layout_error" />
+
+    </RelativeLayout>
+
+</LinearLayout>
