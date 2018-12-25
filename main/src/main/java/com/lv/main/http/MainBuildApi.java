@@ -1,6 +1,7 @@
 package com.lv.main.http;
 
 import com.lv.common.base.BaseApplication;
+import com.lv.common.http.CommConstant;
 import com.lv.common.utils.MD5;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * 获取网络框架类
  */
-public class BuildApi {
+public class MainBuildApi {
 
     //一个API_KEY对应一个SECRET 由接口开发提供
     private final static String API_KEY = "API_KEY_ANDROID_SHOUQU";
@@ -30,16 +31,16 @@ public class BuildApi {
 
     private static Retrofit retrofit;
 
-    public static APIService getAPIService() {
+    public static MainAPIService getAPIService() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(Constant.BASE_URL) //设置Base的访问路径
+                    .baseUrl(CommConstant.BASE_URL) //设置Base的访问路径
                     .addConverterFactory(GsonConverterFactory.create()) //设置默认的解析库：Gson
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(initOkHttp())
                     .build();
         }
-        return retrofit.create(APIService.class);
+        return retrofit.create(MainAPIService.class);
     }
 
     //设置OkHttp超时时间

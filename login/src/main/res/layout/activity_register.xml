@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    tools:context=".ui.RegisterActivity">
+
+    <include layout="@layout/toolbar_comm" />
+
+    <com.scwang.wave.MultiWaveHeader
+        android:id="@+id/wave_header_register"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:scaleY="-1"
+        app:mwhCloseColor="@color/white"
+        app:mwhColorAlpha="1"
+        app:mwhGradientAngle="45"
+        app:mwhProgress="1"
+        app:mwhStartColor="@color/white"
+        app:mwhVelocity="1"
+        app:mwhWaveHeight="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.xw.repo.XEditText
+            android:id="@+id/edit_text_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="50dp"
+            android:drawablePadding="15dp"
+            android:drawableStart="@drawable/ic_login_account"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:padding="3dp"
+            android:textSize="16sp"
+            app:x_clearDrawable="@drawable/ic_login_delete" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp">
+
+            <com.xw.repo.XEditText
+                android:id="@+id/edit_validate_code"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:drawablePadding="15dp"
+                android:drawableStart="@drawable/ic_login_verification"
+                android:hint="请输入验证码"
+                android:inputType="number"
+                android:maxLength="6"
+                android:padding="3dp"
+                android:textSize="16sp"
+                app:x_disableClear="true" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+                <com.lv.common.widget.button.TimeButton
+                    android:id="@+id/btn_get_code"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:text="获取验证码"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <com.xw.repo.XEditText
+            android:id="@+id/edit_text_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:drawablePadding="15dp"
+            android:drawableStart="@drawable/ic_login_password"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:padding="3dp"
+            android:textSize="16sp"
+            app:x_clearDrawable="@drawable/ic_login_delete" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/primary_button"
+            android:padding="10dp"
+            android:text="注册"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

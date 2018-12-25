@@ -1,6 +1,7 @@
 package com.lv.common.webview;
 
 import android.content.Context;
+import android.webkit.WebSettings;
 
 import com.tencent.sonic.sdk.SonicRuntime;
 import com.tencent.sonic.sdk.SonicSessionClient;
@@ -11,8 +12,15 @@ import java.util.Map;
 
 public class SonicRuntimeImpl extends SonicRuntime {
 
+    private WebSettings settings;
+
     public SonicRuntimeImpl(Context context) {
         super(context);
+    }
+
+    public SonicRuntimeImpl(Context context, WebSettings settings) {
+        super(context);
+        this.settings = settings;
     }
 
     @Override
@@ -32,7 +40,9 @@ public class SonicRuntimeImpl extends SonicRuntime {
 
     @Override
     public String getUserAgent() {
-        return null;
+        String userAgentString = settings.getUserAgentString();
+        log("userAgentString", 100, userAgentString);
+        return userAgentString;
     }
 
     @Override

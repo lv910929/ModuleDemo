@@ -21,14 +21,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.lv.common.R;
-import com.lv.common.data.CommConstant;
 import com.lv.common.http.HttpConstant;
 import com.lv.common.webview.MyWebChromeClient;
 import com.lv.common.webview.SonicSessionClientImpl;
 import com.malinskiy.materialicons.IconDrawable;
 import com.malinskiy.materialicons.Iconify;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.sonic.sdk.SonicEngine;
 import com.tencent.sonic.sdk.SonicSession;
 import com.tencent.sonic.sdk.SonicSessionConfig;
@@ -133,23 +134,6 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
 
     //------------------ WebView ---------------//
 
-    protected SonicSession sonicSession;
-
-    protected SonicSessionClientImpl sonicSessionClient;
-
-    protected void setSonicSession(String loadUrl) {
-        SonicSessionClientImpl sonicSessionClient = null;
-        // step 2: Create SonicSession
-        sonicSession = SonicEngine.getInstance().createSession(CommConstant.WEB_URL, new SonicSessionConfig.Builder().build());
-        if (null != sonicSession) {
-            sonicSession.bindClient(sonicSessionClient = new SonicSessionClientImpl());
-        } else {
-            // this only happen when a same sonic session is already running,
-            // u can comment following codes to feedback as a default mode.
-            throw new UnknownError("create session fail!");
-        }
-    }
-
     public static final int REQUEST_CAMERA = 1;
     public static final int REQUEST_CHOOSE = 2;
 
@@ -183,9 +167,6 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
         public void onPageFinished(WebView view, String url) {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
-            if (sonicSession != null) {
-                sonicSession.getSessionClient().pageFinish(url);
-            }
             if (!view.getSettings().getLoadsImagesAutomatically()) {
                 view.getSettings().setLoadsImagesAutomatically(true);
             }
@@ -212,11 +193,6 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
 
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-            if (sonicSession != null) {
-                //step 6: Call sessionClient.requestResource when host allow the application
-                // to return the local data .
-                return (WebResourceResponse) sonicSession.getSessionClient().requestResource(url);
-            }
             return null;
         }
 
@@ -261,21 +237,13 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
             }
         });
 
-        // step 5: webview is ready now, just tell session client to bind
-        if (sonicSessionClient != null) {
-            sonicSessionClient.bindWebView(webView);
-            sonicSessionClient.clientReady();
-        } else { // default mode
-            webView.loadUrl(loadUrl);
-        }
+        webView.loadUrl(loadUrl);
+        // 增加Javascript异常监控
+        CrashReport.setJavascriptMonitor(webView, false);
     }
 
     @Override
     public void onDestroy() {
-        if (null != sonicSession) {
-            sonicSession.destroy();
-            sonicSession = null;
-        }
         super.onDestroy();
     }
 

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.lv.common.base.BaseFragment;
 import com.lv.common.widget.recyclerview.MyRecyclerView;
 import com.lv.main.R;
+import com.scwang.wave.MultiWaveHeader;
 
 import cn.carbs.android.avatarimageview.library.AvatarImageView;
 
@@ -21,10 +22,9 @@ import cn.carbs.android.avatarimageview.library.AvatarImageView;
  */
 public class MineFragment extends BaseFragment {
 
-    private CollapsingToolbarLayout collapsingToolbar;
     private AvatarImageView avatarImageUser;
-    private Toolbar toolbar;
     private MyRecyclerView recyclerMine;
+    private MultiWaveHeader waveHeaderLogin;
 
     public MineFragment() {
     }
@@ -42,15 +42,14 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initUI(View view) {
-        collapsingToolbar = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        waveHeaderLogin = (MultiWaveHeader) view.findViewById(R.id.wave_header_login);
         avatarImageUser = (AvatarImageView) view.findViewById(R.id.avatar_image_user);
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         recyclerMine = (MyRecyclerView) view.findViewById(R.id.recycler_mine);
-        setCollapsingToolbar();
+        setAvatarImageUser();
         setRecyclerMine(view);
     }
 
-    private void setCollapsingToolbar() {
+    private void setAvatarImageUser() {
         String firstChar = String.valueOf("我".charAt(0));
         avatarImageUser.setTextAndColor("我", AvatarImageView.COLORS[0]);
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lv.login">
+
+    <application android:theme="@style/AppTheme.NoActionBar">
+        <activity
+            android:name=".ui.LoginActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"></activity>
+        <activity
+            android:name=".ui.RegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"></activity>
+    </application>
+
+</manifest>

@@ -16,7 +16,7 @@ public class MyToast {
 
     private static Toast mToast = null;
 
-    private static void showShortToast(Context context, String text) {
+    public static void showShortToast(Context context, String text) {
         if (mToast == null) {
             mToast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         } else {

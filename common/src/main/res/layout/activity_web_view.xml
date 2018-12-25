@@ -10,7 +10,6 @@
 
     <include layout="@layout/toolbar_comm" />
 
-
     <ProgressBar
         android:id="@+id/progress_bar_common"
         style="?android:attr/progressBarStyleHorizontal"

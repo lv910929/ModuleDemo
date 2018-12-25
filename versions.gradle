@@ -36,12 +36,19 @@ versions.materialicons = "1.0.2"
 versions.OpeningStartAnimation = "1.0.0"
 versions.ahbottomnavigation = "2.0.6"
 versions.AvatarImageView = "1.0.3"
-versions.VasSonic = "3.0.0"
+versions.VasSonic = "3.1.0"
+versions.MultiWaveHeader = "1.0.0-alpha-1"
+versions.xedittext = "2.0.2@aar"
+
 //Arouter
 versions.arouter_compiler = "1.1.4"
 versions.arouter_api = "1.3.1"
 //butterknife
 versions.butterknife = "8.8.1"
+//热更新
+versions.crashreport_upgrade = "1.3.6"
+versions.nativecrashreport = "latest.release"
+versions.tinker = "1.9.9"
 
 
 def deps = [:]
@@ -97,10 +104,14 @@ deps.progress_activity = "com.github.vlonjatg:progress-activity:$versions.progre
 deps.materialicons = "com.malinskiy:materialicons:$versions.materialicons"
 deps.OpeningStartAnimation = "site.gemus:openingstartanimation:$versions.OpeningStartAnimation"
 deps.ahbottomnavigation = "com.aurelhubert:ahbottomnavigation:$versions.ahbottomnavigation"
+deps.xedittext = "com.xw.repo:xedittext:$versions.xedittext"
+
 //联系人头像控件
 deps.AvatarImageView = "cn.carbs.android:AvatarImageView:$versions.AvatarImageView"
 //VasSonic
 deps.VasSonic = "com.tencent.sonic:sdk:$versions.VasSonic"
+//水波纹
+deps.MultiWaveHeader = "com.scwang.wave:MultiWaveHeader:$versions.MultiWaveHeader"
 
 
 //rxjava
@@ -121,6 +132,11 @@ deps.logger = "com.orhanobut:logger:$versions.logger"
 //arouter
 deps.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
 deps.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+
+//热更新
+deps.crashreport_upgrade = "com.tencent.bugly:crashreport_upgrade:$versions.crashreport_upgrade"
+deps.nativecrashreport = "com.tencent.bugly:nativecrashreport:$versions.nativecrashreport"
+deps.tinker = "com.tencent.tinker:tinker-android-lib:$versions.tinker"
 
 ext.deps = deps
 

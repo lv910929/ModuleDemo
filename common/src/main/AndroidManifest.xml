@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
@@ -39,6 +42,16 @@
         <activity
             android:name=".ui.WebViewActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <!-- 适配全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="ratio_float" />
+
+        <!-- 适配刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
     </application>
 
 </manifest>

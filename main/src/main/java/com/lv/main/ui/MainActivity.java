@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.lv.common.base.BaseMvpActivity;
@@ -14,7 +15,7 @@ import com.lv.main.R;
 import com.lv.main.presenter.MainPresenter;
 import com.lv.main.view.MainView;
 
-
+@Route(path = "/main/MainActivity")
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainView, AHBottomNavigation.OnTabSelectedListener {
 
     private FrameLayout frameMain;
