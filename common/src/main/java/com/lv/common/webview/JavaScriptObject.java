@@ -20,22 +20,5 @@ public class JavaScriptObject {
         this.mContext = mContext;
     }
 
-    //跳转到下一个webview
-    @JavascriptInterface
-    public void pushcontroller(String urlString) {
-        String title = "";
-        String loadUrl = "";
-        Map<String, String> urlMap = UrlParseUtil.parseUrl(urlString);
-        title = urlMap.get("title");
-        loadUrl = UrlParseUtil.spliceUrl(urlMap);
-        IntentUtils.redirectWebView(mContext, title, loadUrl);
-    }
-
-    //退回我的界面
-    @JavascriptInterface
-    public void popcontroller() {
-        ((Activity) mContext).finish();
-        ((Activity) mContext).overridePendingTransition(R.anim.slide_in, R.anim.slide_out_back);
-    }
 
 }

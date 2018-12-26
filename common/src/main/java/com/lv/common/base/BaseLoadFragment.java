@@ -19,7 +19,6 @@ import com.malinskiy.materialicons.IconDrawable;
 import com.malinskiy.materialicons.Iconify;
 import com.vlonjatg.progressactivity.ProgressRelativeLayout;
 
-import butterknife.ButterKnife;
 
 /**
  * MainActivity中的fragment继承这个
@@ -40,7 +39,6 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
         mProgressActivity.addView(onCreateContentView(inflater, mProgressActivity, savedInstanceState));
         errorDrawable = new IconDrawable(getContext(), Iconify.IconValue.zmdi_wifi_off).colorRes(R.color.grey300);
         emptyDrawable = new IconDrawable(getContext(), Iconify.IconValue.zmdi_coffee).colorRes(R.color.grey300);
-        ButterKnife.bind(this, mProgressActivity);
         return mProgressActivity;
     }
 

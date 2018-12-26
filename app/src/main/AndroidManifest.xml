@@ -19,6 +19,16 @@
             android:name="BUGLY_ENABLE_DEBUG"
             android:value="true" />
 
+        <!-- 适配全面屏 -->
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="ratio_float" />
+
+        <!-- 适配刘海屏 -->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
+
     </application>
 
 </manifest>

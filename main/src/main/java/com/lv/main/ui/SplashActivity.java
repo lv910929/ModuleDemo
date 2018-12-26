@@ -9,13 +9,9 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.BaseMvpActivity;
 import com.lv.common.base.BasePresenter;
-import com.lv.common.utils.ActivityUtil;
 import com.lv.common.utils.MyToast;
 import com.lv.common.utils.NetUtils;
 import com.lv.main.R;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseMvpActivity<BasePresenter> {
 

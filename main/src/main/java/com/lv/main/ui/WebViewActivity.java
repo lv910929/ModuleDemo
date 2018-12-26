@@ -1,40 +1,60 @@
-package com.lv.common.ui;
+package com.lv.main.ui;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.ValueCallback;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lv.common.R;
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.SwipeBackActivity;
 import com.lv.common.utils.FileUtils;
 import com.lv.common.webview.MyWebChromeClient;
-import com.lv.common.webview.MyWebViewClient;
+import com.lv.main.R;
+import com.malinskiy.materialicons.IconDrawable;
+import com.malinskiy.materialicons.Iconify;
+import com.tencent.bugly.crashreport.BuglyLog;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
+@Route(path = "/main/WebViewActivity")
 public class WebViewActivity extends SwipeBackActivity implements MyWebChromeClient.OpenFileChooserCallBack, MyWebChromeClient.LollipopFileCallBack, MyWebChromeClient.ProgressChangeCallBack {
 
     private ProgressBar progressBarCommon;
     private WebView webViewCommon;
 
-    private String loadUrl;
-    private String title;
+    @Autowired(name = "loadUrl")
+    String loadUrl;
+    @Autowired(name = "title")
+    String title;
 
-    private MyWebViewClient myWebViewClient;
     private MyWebChromeClient myWebChromeClient;
 
     public static final int REQUEST_CAMERA = 1;
@@ -44,35 +64,82 @@ public class WebViewActivity extends SwipeBackActivity implements MyWebChromeCli
     ValueCallback<Uri[]> mUploadMessagesAboveL;
     private Uri cameraUri;
 
+    //内容布局
+    protected RelativeLayout layoutContent;
+    //出错布局
+    protected LinearLayout layoutError;
+    protected ImageView imageErrorItem;
+    protected TextView textErrorItem;
+    protected Button buttonRetry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ARouter.getInstance().inject(this);//添加在onCreate（）
         setContentView(R.layout.activity_web_view);
-        initData();
         initUI();
-    }
-
-    @Override
-    protected void initData() {
-        Bundle bundle = this.getIntent().getExtras();
-        loadUrl = bundle.getString("loadUrl", "");
-        title = bundle.getString("title", "");
     }
 
     @Override
     protected void initUI() {
         progressBarCommon = (ProgressBar) findViewById(R.id.progress_bar_common);
         webViewCommon = (WebView) findViewById(R.id.web_view_common);
+
+        initStateLayout();
         initToolBar(title, true);
         setWebViewCommon();
+        showContentLayout();
         webViewCommon.loadUrl(loadUrl);
         // 增加Javascript异常监控
         CrashReport.setJavascriptMonitor(webViewCommon, false);
     }
 
+    protected void initStateLayout() {
+        //内容布局
+        layoutContent = (RelativeLayout) findViewById(com.lv.common.R.id.layout_content);
+        //出错布局
+        layoutError = (LinearLayout) findViewById(com.lv.common.R.id.layout_error);
+        imageErrorItem = (ImageView) findViewById(com.lv.common.R.id.image_error_item);
+        textErrorItem = (TextView) findViewById(com.lv.common.R.id.text_error_item);
+        buttonRetry = (Button) findViewById(com.lv.common.R.id.button_retry);
+        setErrorLayout(getString(com.lv.common.R.string.error_data_hint));
+    }
+
+    /**
+     * 设置出错布局
+     */
+    protected void setErrorLayout(String message) {
+        Drawable errorDrawable = new IconDrawable(WebViewActivity.this, Iconify.IconValue.zmdi_wifi_off).colorRes(com.lv.common.R.color.grey300);
+        imageErrorItem.setImageDrawable(errorDrawable);
+        textErrorItem.setText(message);
+        buttonRetry.setOnClickListener(mRetryListener);
+    }
+
+    private View.OnClickListener mRetryListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            showContentLayout();
+            webViewCommon.loadUrl(loadUrl);
+            // 增加Javascript异常监控
+            CrashReport.setJavascriptMonitor(webViewCommon, false);
+        }
+    };
+
+    //显示内容布局
+    public void showContentLayout() {
+        layoutContent.setVisibility(View.VISIBLE);
+        layoutError.setVisibility(View.GONE);
+    }
+
+    //显示出错布局
+    public void showErrorLayout(String message) {
+        layoutError.setVisibility(View.VISIBLE);
+        layoutContent.setVisibility(View.GONE);
+        setErrorLayout(message);
+    }
+
     private void setWebViewCommon() {
         myWebChromeClient = new MyWebChromeClient(WebViewActivity.this, WebViewActivity.this, WebViewActivity.this);
-        myWebViewClient = new MyWebViewClient(WebViewActivity.this);
         WebSettings webSettings = webViewCommon.getSettings();
 
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
@@ -95,7 +162,7 @@ public class WebViewActivity extends SwipeBackActivity implements MyWebChromeCli
         // 设置定位的数据库路径
         webSettings.setGeolocationDatabasePath(dir);
         webSettings.setDomStorageEnabled(true);
-        webViewCommon.setWebViewClient(myWebViewClient);
+        webViewCommon.setWebViewClient(webViewClient);
         webViewCommon.setWebChromeClient(myWebChromeClient);
         webViewCommon.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -118,6 +185,7 @@ public class WebViewActivity extends SwipeBackActivity implements MyWebChromeCli
         });
 
     }
+
 
     @Override
     public void lollipopFileCallBack(ValueCallback<Uri[]> filePathCallback) {
@@ -254,7 +322,12 @@ public class WebViewActivity extends SwipeBackActivity implements MyWebChromeCli
 
     @Override
     public void onProgressChange(WebView view, int newProgress) {
-        progressBarCommon.setProgress(newProgress);
+        if (newProgress == 100) {
+            progressBarCommon.setVisibility(View.GONE);
+        } else {
+            progressBarCommon.setVisibility(View.VISIBLE);
+            progressBarCommon.setProgress(newProgress);
+        }
     }
 
     /**
@@ -274,6 +347,76 @@ public class WebViewActivity extends SwipeBackActivity implements MyWebChromeCli
             }
         }
     }
+
+    /**
+     * 自定义WebViewClient
+     */
+    private WebViewClient webViewClient = new WebViewClient() {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url != null && url.startsWith("mailto:")
+                    || url.startsWith("geo:") || url.startsWith("tel:")) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+                return true;
+            }
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            // TODO Auto-generated method stub
+            Log.d("webview", "正在加载......");
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            // TODO Auto-generated method stub
+            super.onPageFinished(view, url);
+            if (!view.getSettings().getLoadsImagesAutomatically()) {
+                view.getSettings().setLoadsImagesAutomatically(true);
+            }
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+
+        }
+
+        //6.0以下执行
+        @Override
+        public void onReceivedError(WebView view, int errorCode,
+                                    String description, String failingUrl) {
+            // TODO Auto-generated method stub
+            super.onReceivedError(view, errorCode, description, failingUrl);
+            showErrorLayout(getString(R.string.error_data_hint));
+        }
+
+        //处理网页加载失败时
+        //6.0以上执行
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+
+            BuglyLog.i("WebView", "onReceivedError: ");
+            showErrorLayout(getString(R.string.error_data_hint));
+        }
+
+
+        @TargetApi(21)
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            return shouldInterceptRequest(view, request.getUrl().toString());
+        }
+
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+            return null;
+        }
+
+    };
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

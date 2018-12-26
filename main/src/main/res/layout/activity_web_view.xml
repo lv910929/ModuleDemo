@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".ui.DiscoverFragment">
+    tools:context=".ui.WebViewActivity">
 
     <include layout="@layout/toolbar_comm" />
 
@@ -20,24 +21,29 @@
             android:layout_height="match_parent"
             android:visibility="visible">
 
-            <ProgressBar
-                android:id="@+id/progress_web_view"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:progressDrawable="@drawable/progressbar_bg"
-                android:visibility="gone" />
-
-            <WebView
-                android:id="@+id/web_view_discover"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/progress_web_view" />
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_common"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:progressDrawable="@drawable/progressbar_bg"
+                    android:visibility="gone" />
+
+                <WebView
+                    android:id="@+id/web_view_common"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
 
         </RelativeLayout>
 
-        <include layout="@layout/state_layout_error" />
-
+        <include layout="@layout/state_layout_error"/>
     </RelativeLayout>
 
 </LinearLayout>

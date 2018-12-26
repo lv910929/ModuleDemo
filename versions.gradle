@@ -43,8 +43,6 @@ versions.xedittext = "2.0.2@aar"
 //Arouter
 versions.arouter_compiler = "1.1.4"
 versions.arouter_api = "1.3.1"
-//butterknife
-versions.butterknife = "8.8.1"
 //热更新
 versions.crashreport_upgrade = "1.3.6"
 versions.nativecrashreport = "latest.release"
@@ -83,11 +81,6 @@ kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
 kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin = kotlin
-
-def butterknife = [:]
-butterknife.runtime = "com.jakewharton:butterknife:$versions.butterknife"
-butterknife.android_support_compiler = "com.jakewharton:butterknife-compiler:$versions.butterknife"
-deps.butterknife = butterknife
 
 //view
 deps.constraint_layout = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"

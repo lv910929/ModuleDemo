@@ -3,11 +3,8 @@ package com.lv.common.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.provider.ContactsContract;
 
-import com.lv.common.R;
-import com.lv.common.ui.WebViewActivity;
 
 /**
  * 页面跳转
@@ -35,17 +32,5 @@ public class IntentUtils {
         intent.setData(ContactsContract.Contacts.CONTENT_URI);
         ((Activity) context).startActivityForResult(intent, GET_CONTACT_RESULT);
     }
-
-    //跳转到WebView
-    public static void redirectWebView(Context context, String loadUrl, String title) {
-        Intent intent = new Intent(context, WebViewActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putString("loadUrl", loadUrl);
-        bundle.putString("title", title);
-        intent.putExtras(bundle);
-        context.startActivity(intent);
-        ((Activity) context).overridePendingTransition(R.anim.slide_in, R.anim.slide_out_back);
-    }
-
 
 }

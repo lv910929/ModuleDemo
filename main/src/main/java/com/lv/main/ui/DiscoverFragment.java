@@ -22,6 +22,7 @@ import com.lv.common.base.BaseWebMvpFragment;
 import com.lv.common.http.CommConstant;
 import com.lv.common.utils.FileUtils;
 import com.lv.main.R;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
@@ -57,12 +58,20 @@ public class DiscoverFragment extends BaseWebMvpFragment<BasePresenter> {
     }
 
     @Override
+    protected void reload() {
+        webViewDiscover.loadUrl(CommConstant.WEB_URL);
+        // 增加Javascript异常监控
+        CrashReport.setJavascriptMonitor(webViewDiscover, false);
+    }
+
+    @Override
     protected void initUI(View view) {
         textTitle = (TextView) view.findViewById(R.id.text_title);
         progressWebView = (ProgressBar) view.findViewById(R.id.progress_web_view);
         webViewDiscover = (WebView) view.findViewById(R.id.web_view_discover);
         textTitle.setText("发现");
         initStateLayout(view);
+        showContentLayout();
     }
 
     private void setWebViewDiscover() {
@@ -223,12 +232,21 @@ public class DiscoverFragment extends BaseWebMvpFragment<BasePresenter> {
 
     @Override
     public void onProgressChange(WebView view, int newProgress) {
-        if (newProgress==100){
+        if (newProgress == 100) {
             progressWebView.setVisibility(View.GONE);
-        }else {
+        } else {
             progressWebView.setVisibility(View.VISIBLE);
             progressWebView.setProgress(newProgress);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        if (webViewDiscover != null) {
+            webViewDiscover.removeAllViews();
+            webViewDiscover.destroy();
+        }
+        super.onDestroy();
     }
 
 }

@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.lv.common.base.BaseLoadFragment;
 import com.lv.common.base.BasePresenter;
+import com.lv.common.http.CommConstant;
 import com.lv.main.R;
 
 /**
@@ -60,7 +62,12 @@ public class HomeFragment extends BaseLoadFragment<BasePresenter> implements Vie
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.layout_search) {
-
+            ARouter.getInstance()
+                    .build("/main/WebViewActivity")
+                    .withString("title", "测试")
+                    .withString("loadUrl", CommConstant.WEB_URL)
+                    .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
+                    .navigation();
         } else if (id == R.id.btn_to_scan) {
 
         }

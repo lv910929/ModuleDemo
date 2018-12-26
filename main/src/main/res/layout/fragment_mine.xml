@@ -22,7 +22,7 @@
             app:mwhProgress="1"
             app:mwhStartColor="@color/colorPrimaryDark"
             app:mwhVelocity="1"
-            app:mwhWaveHeight="30dp"
+            app:mwhWaveHeight="40dp"
             app:mwhWaves="PairWave" />
 
         <cn.carbs.android.avatarimageview.library.AvatarImageView

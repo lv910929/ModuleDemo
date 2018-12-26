@@ -25,6 +25,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".ui.WebViewActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
     </application>
 
 </manifest>

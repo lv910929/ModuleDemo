@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.ValueCallback;
+import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -29,6 +30,7 @@ import com.lv.common.webview.MyWebChromeClient;
 import com.lv.common.webview.SonicSessionClientImpl;
 import com.malinskiy.materialicons.IconDrawable;
 import com.malinskiy.materialicons.Iconify;
+import com.tencent.bugly.crashreport.BuglyLog;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.sonic.sdk.SonicEngine;
 import com.tencent.sonic.sdk.SonicSession;
@@ -106,9 +108,7 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
     }
 
     //重新加载
-    protected void reload() {
-
-    }
+    protected abstract void reload();
 
     //通用的出错处理
     protected void commFailResult(int code) {
@@ -177,13 +177,25 @@ public abstract class BaseWebMvpFragment<P extends BasePresenter> extends BaseFr
 
         }
 
+        //6.0以下执行
         @Override
         public void onReceivedError(WebView view, int errorCode,
                                     String description, String failingUrl) {
             // TODO Auto-generated method stub
             super.onReceivedError(view, errorCode, description, failingUrl);
-            setErrorLayout(getString(R.string.error_data_hint));
+            showErrorLayout(getActivity().getString(R.string.error_data_hint));
         }
+
+        //处理网页加载失败时
+        //6.0以上执行
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+
+            BuglyLog.i("WebView", "onReceivedError: ");
+            showErrorLayout(getActivity().getString(R.string.error_data_hint));
+        }
+
 
         @TargetApi(21)
         @Override

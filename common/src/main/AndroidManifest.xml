@@ -39,19 +39,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application>
-        <activity
-            android:name=".ui.WebViewActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
-        <!-- 适配全面屏 -->
-        <meta-data
-            android:name="android.max_aspect"
-            android:value="ratio_float" />
-
-        <!-- 适配刘海屏 -->
-        <meta-data
-            android:name="android.notch_support"
-            android:value="true" />
     </application>
 
 </manifest>
