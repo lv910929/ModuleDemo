@@ -19,6 +19,8 @@ public final class HttpConstant {
     public static final int CALL_TAG_8 = 0X008;
     public static final int CALL_TAG_9 = 0X009;
 
+    public static final int SUCCESS_STATE_CODE = 0;
+
     /**
      * 错误代码
      */

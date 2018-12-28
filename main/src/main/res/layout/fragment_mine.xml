@@ -37,6 +37,15 @@
             app:aiv_ShowBoarder="true"
             app:aiv_TextSizeRatio="0.4" />
 
+        <ImageView
+            android:id="@+id/btn_to_setting"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/icon_setting"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentRight="true"/>
+
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView

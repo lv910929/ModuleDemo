@@ -7,33 +7,29 @@ import java.io.Serializable;
  */
 public class HttpResult<T> implements Serializable {
 
-    private boolean error;
+    private int status;
 
-    private String errorMessage;
+    private String message;
 
     private T data;
 
     public HttpResult() {
     }
 
-    public HttpResult(boolean error) {
-        this.error = error;
+    public int getStatus() {
+        return status;
     }
 
-    public boolean isError() {
-        return error;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
+    public String getMessage() {
+        return message;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public T getData() {

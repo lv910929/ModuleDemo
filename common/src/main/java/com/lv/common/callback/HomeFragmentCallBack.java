@@ -12,7 +12,7 @@ public interface HomeFragmentCallBack {
     public void notificationUpdate(int notificationNum);
 
     //通知fragment登录成功
-    public void hasLogin();
+    public void checkLogin();
 
     //通知购物车切换模式
     public void changeMode(boolean editMode);

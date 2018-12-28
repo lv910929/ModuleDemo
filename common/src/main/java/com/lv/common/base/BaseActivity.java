@@ -4,19 +4,20 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.jaeger.library.StatusBarUtil;
 import com.lv.common.R;
 import com.lv.common.utils.HideInputUtils;
+import com.lv.common.utils.PrefUtils;
+
+import net.steamcrafted.loadtoast.LoadToast;
 
 
 /**
@@ -24,17 +25,31 @@ import com.lv.common.utils.HideInputUtils;
  */
 public class BaseActivity extends AppCompatActivity {
 
+    protected LoadToast loadToast;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        loadToast = new LoadToast(this);
     }
 
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
         //setStatusBar();
+    }
+
+    /**
+     * 显示加载动画
+     *
+     * @param message
+     */
+    protected void showLoadToast(String message) {
+        loadToast.setText(message);
+        loadToast.setTextColor(this.getResources().getColor(R.color.colorPrimary));
+        loadToast.setTranslationY(300);
+        loadToast.show();
     }
 
     /**
@@ -120,6 +135,46 @@ public class BaseActivity extends AppCompatActivity {
         hideView.setVisibility(View.VISIBLE);
     }
 
+    //判断是否第一次安装
+    public boolean isFirstRun() {
+        return PrefUtils.getBoolean(this, "isFirstRun", true);
+    }
+
+    //设置是否第一次安装
+    public void setFirstRun(boolean isFirstRun) {
+        PrefUtils.putBoolean(this, "isFirstRun", isFirstRun);
+    }
+
+    //判断登录状态
+    public boolean hasLogin() {
+        return PrefUtils.getBoolean(this, "hasLogin", false);
+    }
+
+    //设置登录状态
+    public void setHasLogin(boolean hasLogin) {
+        PrefUtils.putBoolean(this, "hasLogin", hasLogin);
+    }
+
+    //存放永久token
+    public void setTokenFixed(String tokenFixed) {
+        PrefUtils.putString(this, "tokenFixed", tokenFixed);
+    }
+
+    //获取永久Token
+    public String getTokenFixed() {
+        return PrefUtils.getString(this, "tokenFixed", "");
+    }
+
+    //获取临时token
+    public String getTokenTemp() {
+        return PrefUtils.getString(this, "tokenTemp", "");
+    }
+
+    //存放临时token
+    public void setTokenTemp(String tokenTemp) {
+        PrefUtils.putString(this, "tokenTemp", tokenTemp);
+    }
+
     //返回退出动画
     @Override
     public void onBackPressed() {
@@ -142,5 +197,5 @@ public class BaseActivity extends AppCompatActivity {
         Glide.with(this.getApplicationContext()).onDestroy();
         super.onDestroy();
     }
-    
+
 }

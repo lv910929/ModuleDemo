@@ -5,9 +5,9 @@
 ext.deps = [:]
 
 def versions = [:]
-versions.android_gradle_plugin = "3.0.1"
+versions.android_gradle_plugin = "3.1.0"
 versions.kotlin = "1.1.51"
-versions.support = "27.0.2"
+versions.support = "27.1.1"
 versions.multidex = "1.0.2"
 versions.constraint_layout = "1.0.2"
 versions.glide = "3.8.0"
@@ -39,6 +39,7 @@ versions.AvatarImageView = "1.0.3"
 versions.VasSonic = "3.1.0"
 versions.MultiWaveHeader = "1.0.0-alpha-1"
 versions.xedittext = "2.0.2@aar"
+versions.load_toast = "1.0.12"
 
 //Arouter
 versions.arouter_compiler = "1.1.4"
@@ -98,6 +99,7 @@ deps.materialicons = "com.malinskiy:materialicons:$versions.materialicons"
 deps.OpeningStartAnimation = "site.gemus:openingstartanimation:$versions.OpeningStartAnimation"
 deps.ahbottomnavigation = "com.aurelhubert:ahbottomnavigation:$versions.ahbottomnavigation"
 deps.xedittext = "com.xw.repo:xedittext:$versions.xedittext"
+deps.load_toast = "net.steamcrafted:load-toast:$versions.load_toast"
 
 //联系人头像控件
 deps.AvatarImageView = "cn.carbs.android:AvatarImageView:$versions.AvatarImageView"

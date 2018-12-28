@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.BaseMvpActivity;
 import com.lv.common.base.BasePresenter;
+import com.lv.common.data.CommonPath;
 import com.lv.common.utils.MyToast;
 import com.lv.common.utils.NetUtils;
 import com.lv.main.R;
@@ -49,7 +50,7 @@ public class SplashActivity extends BaseMvpActivity<BasePresenter> {
                     MyToast.showBottomToast(SplashActivity.this, R.id.layout_content, "无网络可用");
                 }
                 ARouter.getInstance()
-                        .build("/login/LoginActivity")
+                        .build(CommonPath.MAIN_ACTIVITY_PATH)
                         .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
                         .navigation();
                 finish();

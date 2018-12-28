@@ -1,23 +1,27 @@
 package com.lv.login.ui;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.lv.common.base.BasePresenter;
 import com.lv.common.base.SwipeBackMvpActivity;
+import com.lv.common.data.CommonPath;
+import com.lv.common.utils.IntentUtils;
 import com.lv.common.utils.MyToast;
 import com.lv.common.utils.ValidateUtil;
 import com.lv.common.widget.button.TimeButton;
 import com.lv.login.R;
+import com.lv.login.presenter.LoginPresenter;
+import com.lv.login.view.LoginView;
 import com.scwang.wave.MultiWaveHeader;
 import com.xw.repo.XEditText;
 
-@Route(path = "/login/LoginActivity")
-public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implements View.OnClickListener {
+@Route(path = CommonPath.LOGIN_ACTIVITY_PATH)
+public class LoginActivity extends SwipeBackMvpActivity<LoginPresenter> implements View.OnClickListener, LoginView {
 
     private MultiWaveHeader waveHeaderLogin;
     private XEditText editTextPhone;
@@ -37,8 +41,8 @@ public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implement
     }
 
     @Override
-    protected BasePresenter createPresenter() {
-        return null;
+    protected LoginPresenter createPresenter() {
+        return new LoginPresenter(this, this);
     }
 
     @Override
@@ -51,7 +55,7 @@ public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implement
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnToRegister = (Button) findViewById(R.id.btn_to_register);
 
-        initToolBar("登录账号", false);
+        initToolBar("登录账号", true);
         /**
          * 格式-format
          * offsetX offsetY scaleX scaleY velocity（dp/s）
@@ -82,6 +86,8 @@ public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implement
         } else {
             if (TextUtils.isEmpty(validateCode)) {
                 stringBuilder.append("验证码不能为空\n");
+            } else if (!ValidateUtil.validateSmsCode(validateCode)) {
+                stringBuilder.append("请输入有效的验证码\n");
             }
         }
         if (!TextUtils.isEmpty(stringBuilder)) {
@@ -93,6 +99,7 @@ public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implement
 
     /**
      * 获取验证码校验
+     *
      * @return
      */
     private boolean validateCode() {
@@ -117,22 +124,59 @@ public class LoginActivity extends SwipeBackMvpActivity<BasePresenter> implement
         int id = v.getId();
         if (id == R.id.btn_login) {
             if (validateLogin()) {
-                ARouter.getInstance()
-                        .build("/main/MainActivity")
-                        .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
-                        .navigation();
+                showLoadToast("登录中");
+                //延迟请求数据
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        mvpPresenter.loginReq(phone, validateCode);
+                    }
+                }, 1000);
             }
         } else if (id == R.id.btn_get_code) {
-            if (validateCode()){
-                btnGetCode.start();
+            if (validateCode()) {
+                showLoadToast("发送短信中");
+                //延迟请求数据
+                new Handler().postDelayed(new Runnable() {
+                    public void run() {
+                        mvpPresenter.getSmsCodeReq(phone);
+                    }
+                }, 1000);
             }
         } else if (id == R.id.btn_to_register) {
             ARouter.getInstance()
-                    .build("/login/RegisterActivity")
+                    .build(CommonPath.REGISTER_ACTIVITY_PATH)
                     .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
                     .navigation();
         }
     }
 
+
+    @Override
+    public void getCodeSuccess() {
+        btnGetCode.start();
+    }
+
+    @Override
+    public void loginSuccess(String tokenTemp, String tokenFixed) {
+        //保存临时token
+        setTokenTemp(tokenTemp);
+        //保存永久token
+        setTokenFixed(tokenFixed);
+        //保存已登录状态
+        setHasLogin(true);
+        //通知首页已经登录
+        IntentUtils.notifyHasLogin();
+        onBackPressed();
+    }
+
+    @Override
+    public void showLoad() {
+
+    }
+
+    @Override
+    public void hideLoad() {
+        loadToast.hide();
+    }
 
 }

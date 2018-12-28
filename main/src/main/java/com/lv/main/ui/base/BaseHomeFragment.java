@@ -1,8 +1,9 @@
-package com.lv.common.base;
+package com.lv.main.ui.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +11,16 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.lv.common.R;
+import com.lv.common.base.BaseFragment;
+import com.lv.common.base.BasePresenter;
+import com.lv.common.callback.HomeFragmentCallBack;
 import com.lv.common.http.HttpConstant;
 import com.lv.common.utils.DoubleClickUtil;
+import com.lv.main.R;
 import com.malinskiy.materialicons.IconDrawable;
 import com.malinskiy.materialicons.Iconify;
 import com.vlonjatg.progressactivity.ProgressRelativeLayout;
@@ -23,22 +29,34 @@ import com.vlonjatg.progressactivity.ProgressRelativeLayout;
 /**
  * MainActivity中的fragment继承这个
  */
-public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
+public abstract class BaseHomeFragment<P extends BasePresenter> extends BaseFragment implements HomeFragmentCallBack,SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
+
+    //用于和activity通讯
+    protected HomeFragmentCallBack callBack;
 
     private ProgressRelativeLayout mProgressActivity;
     protected Drawable errorDrawable;
     protected Drawable emptyDrawable;
+    protected Drawable loginDrawable;
 
-    protected FloatingActionButton btnToTop;
+    protected ImageView btnToTop;
     protected int itemHeight;
     protected boolean isPassFirstItem;
 
     @Override
+    public void onAttach(Activity activity) {
+        callBack = (HomeFragmentCallBack) activity;
+        super.onAttach(activity);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true); // 让Fragment的菜单按钮生效
         mProgressActivity = (ProgressRelativeLayout) inflater.inflate(R.layout.fragment_base_loading, container, false);
         mProgressActivity.addView(onCreateContentView(inflater, mProgressActivity, savedInstanceState));
         errorDrawable = new IconDrawable(getContext(), Iconify.IconValue.zmdi_wifi_off).colorRes(R.color.grey300);
         emptyDrawable = new IconDrawable(getContext(), Iconify.IconValue.zmdi_coffee).colorRes(R.color.grey300);
+        loginDrawable = new IconDrawable(getContext(), Iconify.IconValue.zmdi_coffee).colorRes(R.color.grey300);
         return mProgressActivity;
     }
 
@@ -66,6 +84,10 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
         mProgressActivity.showError(emptyDrawable, emptyTextTitle, emptyTextContent, emptyButtonText, onClickListener);
     }
 
+    protected void showLogin(String loginTextContent, String loginButtonText, View.OnClickListener onClickListener) {
+        mProgressActivity.showError(loginDrawable, "", loginTextContent, loginButtonText, onClickListener);
+    }
+
     protected void getData() {
 
     }
@@ -91,6 +113,13 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
         }
     }
 
+    protected View.OnClickListener mEmptyOrderListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            callBack.transferMsg();
+        }
+    };
+
     protected View.OnClickListener mErrorRetryListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -104,16 +133,14 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
         @Override
         public void onClick(View v) {
             if (DoubleClickUtil.isFastDoubleClick()) return; //防止连续点击打开多个界面
-
         }
     };
 
     //设置上拉刷新
-    protected void initRecyclerArrayAdapter(final RecyclerArrayAdapter adapter) {
+    protected void initRecyclerArrayAdapter(Context context, final RecyclerArrayAdapter adapter) {
         adapter.setMore(R.layout.view_more, this);
         adapter.setNoMore(R.layout.view_nomore, null);
         adapter.setError(R.layout.view_error, new RecyclerArrayAdapter.OnErrorListener() {
-
             @Override
             public void onErrorShow() {
                 adapter.resumeMore();
@@ -126,6 +153,31 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
         });
     }
 
+    @Override
+    public void transferMsg() {
+
+    }
+
+    @Override
+    public void changeMode(boolean editMode) {
+
+    }
+
+    @Override
+    public void checkLogin() {
+
+    }
+
+    @Override
+    public void notificationUpdate(int notificationNum) {
+
+    }
+
+    @Override
+    public void notifyCollectNum() {
+
+    }
+
     //设置下拉刷新样式
     protected void setSwipeRefreshLayout(EasyRecyclerView easyRecyclerView) {
         if (easyRecyclerView != null) {
@@ -136,7 +188,8 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
 
     //初始化返回顶部按钮
     protected void initBtnToTop(View view, final RecyclerView recyclerView) {
-        btnToTop = (FloatingActionButton) view.findViewById(R.id.btn_to_top);
+        btnToTop = (ImageView) view.findViewById(R.id.btn_to_top);
+        btnToTop.setAlpha(0.6f);
         btnToTop.setVisibility(View.GONE);
         btnToTop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,5 +272,4 @@ public abstract class BaseLoadFragment<P extends BasePresenter> extends BaseFrag
             mvpPresenter.detachView();
         }
     }
-
 }

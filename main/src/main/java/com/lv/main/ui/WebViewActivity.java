@@ -34,6 +34,7 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.SwipeBackActivity;
+import com.lv.common.data.CommonPath;
 import com.lv.common.utils.FileUtils;
 import com.lv.common.webview.MyWebChromeClient;
 import com.lv.main.R;
@@ -44,7 +45,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.File;
 
-@Route(path = "/main/WebViewActivity")
+@Route(path = CommonPath.WEB_ACTIVITY_PATH)
 public class WebViewActivity extends SwipeBackActivity implements MyWebChromeClient.OpenFileChooserCallBack, MyWebChromeClient.LollipopFileCallBack, MyWebChromeClient.ProgressChangeCallBack {
 
     private ProgressBar progressBarCommon;

@@ -5,15 +5,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.BasePresenter;
 import com.lv.common.base.SwipeBackMvpActivity;
+import com.lv.common.data.CommonPath;
 import com.lv.common.widget.button.TimeButton;
 import com.lv.login.R;
 import com.scwang.wave.MultiWaveHeader;
 import com.xw.repo.XEditText;
 
-@Route(path = "/login/RegisterActivity")
+@Route(path = CommonPath.REGISTER_ACTIVITY_PATH)
 public class RegisterActivity extends SwipeBackMvpActivity<BasePresenter> implements View.OnClickListener {
 
     private MultiWaveHeader waveHeaderRegister;

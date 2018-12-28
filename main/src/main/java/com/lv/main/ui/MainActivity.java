@@ -3,20 +3,25 @@ package com.lv.main.ui;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.lv.common.base.BaseMvpActivity;
+import com.lv.common.callback.HomeFragmentCallBack;
+import com.lv.common.data.CommonPath;
+import com.lv.common.event.MainEvent;
 import com.lv.main.R;
 import com.lv.main.presenter.MainPresenter;
 import com.lv.main.view.MainView;
 
-@Route(path = "/main/MainActivity")
-public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainView, AHBottomNavigation.OnTabSelectedListener {
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+@Route(path = CommonPath.MAIN_ACTIVITY_PATH)
+public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainView, AHBottomNavigation.OnTabSelectedListener,HomeFragmentCallBack {
 
     private FrameLayout frameMain;
     private AHBottomNavigation bottomNavigation;
@@ -35,6 +40,7 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         initUI();
@@ -149,6 +155,20 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void onEvent(MainEvent event) {
+        switch (event.getWhat()) {
+            case 0://登录回调
+                if (homeFragment != null) {
+                    homeFragment.checkLogin();
+                }
+                if (mineFragment != null) {
+                    mineFragment.checkLogin();
+                }
+                break;
+        }
+    }
+
     @Override
     protected MainPresenter createPresenter() {
         return new MainPresenter(this, this);
@@ -162,6 +182,45 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     public void hideLoad() {
 
+    }
+
+    @Override
+    public void transferMsg() {
+
+    }
+
+    @Override
+    public void notificationUpdate(int notificationNum) {
+
+    }
+
+    @Override
+    public void checkLogin() {
+
+    }
+
+    @Override
+    public void changeMode(boolean editMode) {
+
+    }
+
+    @Override
+    public void notifyCollectNum() {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
 }

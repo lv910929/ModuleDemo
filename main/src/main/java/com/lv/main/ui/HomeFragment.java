@@ -11,15 +11,16 @@ import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.lv.common.base.BaseLoadFragment;
 import com.lv.common.base.BasePresenter;
+import com.lv.common.data.CommonPath;
 import com.lv.common.http.CommConstant;
 import com.lv.main.R;
+import com.lv.main.ui.base.BaseHomeFragment;
 
 /**
  * 首页
  */
-public class HomeFragment extends BaseLoadFragment<BasePresenter> implements View.OnClickListener {
+public class HomeFragment extends BaseHomeFragment<BasePresenter> implements View.OnClickListener {
 
     private RelativeLayout layoutSearch;
     private ImageView btnToScan;
@@ -51,6 +52,7 @@ public class HomeFragment extends BaseLoadFragment<BasePresenter> implements Vie
         recyclerHome = (EasyRecyclerView) view.findViewById(R.id.recycler_home);
         setRecyclerHome(view);
         layoutSearch.setOnClickListener(this);
+        recyclerHome.setRefreshListener(this);
     }
 
     private void setRecyclerHome(View view) {
@@ -63,7 +65,7 @@ public class HomeFragment extends BaseLoadFragment<BasePresenter> implements Vie
         int id = v.getId();
         if (id == R.id.layout_search) {
             ARouter.getInstance()
-                    .build("/main/WebViewActivity")
+                    .build(CommonPath.WEB_ACTIVITY_PATH)
                     .withString("title", "测试")
                     .withString("loadUrl", CommConstant.WEB_URL)
                     .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
@@ -83,4 +85,8 @@ public class HomeFragment extends BaseLoadFragment<BasePresenter> implements Vie
 
     }
 
+    @Override
+    public void checkLogin() {
+
+    }
 }

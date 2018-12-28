@@ -1,15 +1,14 @@
 package com.lv.moduledemo;
 
 import android.content.Context;
-import android.os.Handler;
 import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.lv.common.base.BaseApplication;
-import com.lv.common.utils.HttpsUtils;
+import com.lv.common.utils.DeviceUtils;
 import com.lv.common.utils.Utils;
 import com.lv.common.webview.SonicRuntimeImpl;
+import com.tencent.bugly.crashreport.BuglyLog;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.sonic.sdk.SonicConfig;
 import com.tencent.sonic.sdk.SonicEngine;
@@ -38,6 +37,10 @@ public class MyApp extends BaseApplication {
         }
         //初始化bugly
         CrashReport.initCrashReport(getApplicationContext());
+        BuglyLog.e("设备名称：-----------", DeviceUtils.getSystemModel());
+        BuglyLog.e("设备品牌：-----------", DeviceUtils.getDeviceBrand());
+        BuglyLog.e("系统版本：-----------", DeviceUtils.getSystemVersion());
+        BuglyLog.e("设备UUID：-----------", DeviceUtils.getUniqueId(this));
 
     }
 

@@ -76,6 +76,7 @@ dependencies {
     api deps.VasSonic
     api deps.MultiWaveHeader
     api deps.xedittext
+    api deps.load_toast
 
     //router
     api deps.arouter_api

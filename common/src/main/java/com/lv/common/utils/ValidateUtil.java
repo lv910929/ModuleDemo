@@ -111,4 +111,17 @@ public class ValidateUtil {
         }
         return result;
     }
+
+    public static boolean validateSmsCode(String string) {
+
+        boolean result = false;
+        String regex = "[0-9]{6}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.matches()) {
+            result = true;
+        }
+        return result;
+    }
+
 }

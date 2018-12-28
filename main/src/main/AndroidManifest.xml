@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lv.main">
 
-    <application android:theme="@style/AppTheme.NoActionBar">
+    <application>
 
-        <activity android:name=".ui.SplashActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -13,6 +14,7 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -27,6 +29,10 @@
 
         <activity
             android:name=".ui.WebViewActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+
+        <activity
+            android:name=".ui.SettingActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
 
     </application>

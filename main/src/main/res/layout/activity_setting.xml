@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey100"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_comm" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/super_text_update"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        stv:sLeftTextString="检查更新"
+        stv:sLineShow="bottom"
+        stv:sRightIconRes="@drawable/forward_icon"
+        stv:sUseRipple="true" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/super_text_cache"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        stv:sLeftTextString="清理缓存"
+        stv:sLineShow="bottom"
+        stv:sRightTextString="0KB"
+        stv:sUseRipple="true" />
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/super_text_share"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        stv:sLeftTextString="分享给好友"
+        stv:sLineShow="bottom"
+        stv:sRightIconRes="@drawable/forward_icon"
+        stv:sUseRipple="true" />
+
+
+    <Button
+        android:id="@+id/btn_exit_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/primary_button"
+        android:elevation="2dp"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

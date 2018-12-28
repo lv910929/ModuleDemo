@@ -23,8 +23,7 @@ public class NetUtils {
         final ConnectivityManager connectivityManager = (ConnectivityManager) ctx
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         // 获取连接的网络信息
-        @SuppressLint("MissingPermission")
-        final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        @SuppressLint("MissingPermission") final NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isAvailable());
     }
 
@@ -83,6 +82,35 @@ public class NetUtils {
             }
         } else {
             return "无网络";
+        }
+    }
+
+    /**
+     * 获取网络类型
+     *
+     * @param context
+     * @return
+     */
+    public static String getNetworkType(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            if (activeNetworkInfo == null) {
+                return "3";
+            }
+            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                return "1";
+            } else {
+                String typeName = activeNetworkInfo.getSubtypeName();
+                Log.i("网络名称:", typeName);
+                if (typeName == null || typeName.length() == 0) {
+                    return "3";
+                } else {
+                    return "2";
+                }
+            }
+        } else {
+            return "3";
         }
     }
 

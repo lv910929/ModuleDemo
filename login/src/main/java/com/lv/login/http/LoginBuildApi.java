@@ -1,4 +1,4 @@
-package com.lv.main.http;
+package com.lv.login.http;
 
 import android.content.Context;
 
@@ -13,20 +13,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * 获取网络框架类
  */
-public class MainBuildApi {
+public class LoginBuildApi {
 
     private static Retrofit retrofit;
 
-    public static MainAPIService getAPIService(Context context) {
+    public static LoginAPIService getAPIService(Context context) {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl(CommConstant.BASE_URL) //设置Base的访问路径
+                    .baseUrl(CommConstant.DEBUG_URL) //设置Base的访问路径
                     .addConverterFactory(GsonConverterFactory.create()) //设置默认的解析库：Gson
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .client(HttpConfig.initOkHttp(context.getApplicationContext()))
                     .build();
         }
-        return retrofit.create(MainAPIService.class);
+        return retrofit.create(LoginAPIService.class);
     }
 
 }

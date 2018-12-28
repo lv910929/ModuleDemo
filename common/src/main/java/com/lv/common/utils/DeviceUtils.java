@@ -1,10 +1,13 @@
 package com.lv.common.utils;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Point;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
@@ -64,15 +67,73 @@ public class DeviceUtils {
      */
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    public static Point getScreenSize(Context context){
+    public static Point getScreenSize(Context context) {
         WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = windowManager.getDefaultDisplay();
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2){
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2) {
             return new Point(display.getWidth(), display.getHeight());
-        }else{
+        } else {
             Point point = new Point();
             display.getSize(point);
             return point;
         }
     }
+
+    /**
+     * 获取手机唯一码
+     *
+     * @param context
+     * @return
+     */
+    @SuppressLint("MissingPermission")
+    public static String getIMEI(Context context) {
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (telephonyManager != null) {
+            String deviceId = telephonyManager.getDeviceId();
+            if (deviceId == null || TextUtils.isEmpty(deviceId)) {
+                return getUniqueId(context);
+            } else {
+                return deviceId;
+            }
+        } else {
+            return getUniqueId(context);
+        }
+    }
+
+    /**
+     * 获取设备名
+     *
+     * @return
+     */
+    public static String getDeviceName() {
+        return android.os.Build.DEVICE;
+    }
+
+    /**
+     * 获取当前手机系统版本号
+     *
+     * @return 系统版本号
+     */
+    public static String getSystemVersion() {
+        return android.os.Build.VERSION.RELEASE;
+    }
+
+    /**
+     * 获取手机型号
+     *
+     * @return 手机型号
+     */
+    public static String getSystemModel() {
+        return android.os.Build.MODEL;
+    }
+
+    /**
+     * 获取手机厂商
+     *
+     * @return 手机厂商
+     */
+    public static String getDeviceBrand() {
+        return android.os.Build.BRAND;
+    }
+
 }

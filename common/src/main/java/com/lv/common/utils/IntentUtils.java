@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.ContactsContract;
 
+import com.lv.common.event.MainEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * 页面跳转
@@ -31,6 +35,11 @@ public class IntentUtils {
         intent.setAction(Intent.ACTION_PICK);
         intent.setData(ContactsContract.Contacts.CONTENT_URI);
         ((Activity) context).startActivityForResult(intent, GET_CONTACT_RESULT);
+    }
+
+    //通知登录成功
+    public static void notifyHasLogin() {
+        EventBus.getDefault().post(new MainEvent(0, null));
     }
 
 }

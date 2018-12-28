@@ -3,12 +3,13 @@ package com.lv.common.widget.recyclerview;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v4.BuildConfig;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import com.lv.common.BuildConfig;
 
 import java.lang.reflect.Field;
 
@@ -174,10 +175,7 @@ public class FullyLinearLayoutManager extends LinearLayoutManager {
         }
 
         private void logMeasureWarning(int child) {
-            if (BuildConfig.DEBUG) {
-                Log.w("LinearLayoutManager", "Can't measure child #" + child + ", previously used dimensions will be reused." +
-                        "To remove this message either use #setChildSize() method or don't run RecyclerView animations");
-            }
+
         }
 
         private void initChildDimensions(int width, int height, boolean vertical) {
