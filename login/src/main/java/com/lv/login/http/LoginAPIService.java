@@ -2,6 +2,7 @@ package com.lv.login.http;
 
 
 import com.lv.common.entity.HttpResult;
+import com.lv.common.entity.UserEntity;
 import com.lv.login.entity.LoginEntity;
 import com.lv.login.request.LoginBody;
 import com.lv.login.request.SmsCodeBody;
@@ -21,6 +22,6 @@ public interface LoginAPIService {
 
     //登录
     @POST(LoginConstant.LOGIN_URL)
-    Observable<HttpResult<LoginEntity>> loginReq(@Body LoginBody loginBody);
+    Observable<HttpResult<UserEntity>> loginReq(@Body LoginBody loginBody);
 
 }

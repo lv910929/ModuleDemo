@@ -7,9 +7,9 @@ public class CommConstant {
     //官网地址
     public static final String BASE_URL = "https://i.homepin.cn/";
     //测试地址
-    public static final String DEBUG_URL = "http://192.168.1.106:7001/";
+    public static final String DEBUG_URL = "http://32.114.82.188:3000/mock/41/";
 
     //获取TOKEN
-    public static final String GET_TOKEN_URL = "/getTokenTemp";
+    public static final String GET_TOKEN_URL = "member/getTokenTemp";
 
 }

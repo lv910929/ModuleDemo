@@ -86,4 +86,7 @@ dependencies {
     if (!isModule.toBoolean()) {
         implementation project(':login')
     }
+    if (!isModule.toBoolean()) {
+        implementation project(':user')
+    }
 }

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey100"
+    android:orientation="vertical"
+    tools:context=".ui.UserActivity">
+
+    <include layout="@layout/toolbar_comm" />
+
+    <com.lv.common.widget.scroll.ElasticScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:focusable="false">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="常规设置"
+                    android:textColor="@color/red600"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftTextString="更换头像"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTvDrawableRight="@drawable/head_default" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftTextString="更改昵称"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="匿名" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_gender"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftTextString="更改性别"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="请选择" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftTextString="更改生日"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="请选择" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_signature"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftTextString="更改签名"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:focusable="false">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="密保设置"
+                    android:textColor="@color/red600"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_phone"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftIconRes="@drawable/ic_login_password"
+                stv:sLeftTextString="手机号"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="138****6452" />
+
+            <com.allen.library.SuperTextView
+                android:id="@+id/super_change_email"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                stv:sLeftIconRes="@drawable/ic_login_verification"
+                stv:sLeftTextString="邮箱"
+                stv:sDividerLineType="bottom"
+                stv:sUseRipple="true"
+                stv:sRightIconRes="@drawable/forward_icon"
+                stv:sRightTextString="未绑定" />
+
+        </LinearLayout>
+    </com.lv.common.widget.scroll.ElasticScrollView>
+</LinearLayout>

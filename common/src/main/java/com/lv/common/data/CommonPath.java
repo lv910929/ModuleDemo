@@ -15,5 +15,7 @@ public class CommonPath {
     public static final String WEB_ACTIVITY_PATH = "/main/WebViewActivity";
     //设置
     public static final String SET_ACTIVITY_PATH = "/main/SettingActivity";
+    //个人资料
+    public static final String USER_ACTIVITY_PATH = "/user/UserActivity";
 
 }

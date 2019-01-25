@@ -15,7 +15,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         stv:sLeftTextString="检查更新"
-        stv:sLineShow="bottom"
+        stv:sDividerLineType="bottom"
         stv:sRightIconRes="@drawable/forward_icon"
         stv:sUseRipple="true" />
 
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         stv:sLeftTextString="清理缓存"
-        stv:sLineShow="bottom"
+        stv:sDividerLineType="bottom"
         stv:sRightTextString="0KB"
         stv:sUseRipple="true" />
 
@@ -34,7 +34,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         stv:sLeftTextString="分享给好友"
-        stv:sLineShow="bottom"
+        stv:sDividerLineType="bottom"
         stv:sRightIconRes="@drawable/forward_icon"
         stv:sUseRipple="true" />
 

@@ -6,10 +6,10 @@ package com.lv.login.http;
 public class LoginConstant {
 
     //发送短信验证码
-    public static final String SMS_CODE_URL = "/SendSMSCode";
+    public static final String SMS_CODE_URL = "member/SendSMSCode";
 
     //登录
-    public static final String LOGIN_URL = "/login";
+    public static final String LOGIN_URL = "member/login";
 
 
 }

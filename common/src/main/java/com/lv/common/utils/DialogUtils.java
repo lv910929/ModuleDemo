@@ -7,6 +7,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 
+import com.lv.common.R;
+import com.lv.common.event.MainEvent;
+import com.lv.common.event.UserEvent;
+
+import org.greenrobot.eventbus.EventBus;
+
 
 /**
  * Created by Lv on 2016/4/14.
@@ -60,13 +66,13 @@ public class DialogUtils {
     /**
      * 跳转到设置对话框
      */
-    public static void showSettingDialog(final Activity activity) {
+    public static void showSettingDialog(final Activity activity, String message) {
         //创建对话框创建器
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         //设置标题
         builder.setTitle("权限申请");
         //设置正文
-        builder.setMessage("在设置-应用-品在家-权限 中开启相机、存储权限，才能正常使用");
+        builder.setMessage(message);
 
         //添加确定按钮点击事件
         builder.setPositiveButton("去设置", new DialogInterface.OnClickListener() {//点击完确定后，触发这个事件
@@ -90,6 +96,30 @@ public class DialogUtils {
         //使用构建器创建出对话框对象
         AlertDialog dialog = builder.create();
         dialog.show();//显示对话框
+    }
+
+    /**
+     * 拍照、相册对话框
+     */
+    public static void showPhotoDialog(final Activity mActivity) {
+        String[] selectPicTypeStr = {"拍照", "图库"};
+        new AlertDialog.Builder(mActivity)
+                .setTitle("上传头像")
+                .setCancelable(true)
+                .setItems(selectPicTypeStr,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0: // 相机拍摄
+                                        EventBus.getDefault().post(new UserEvent(1, null));
+                                        break;
+                                    case 1:// 手机相册
+                                        EventBus.getDefault().post(new UserEvent(2, null));
+                                        break;
+                                }
+                            }
+                        }).show();
     }
 
 }

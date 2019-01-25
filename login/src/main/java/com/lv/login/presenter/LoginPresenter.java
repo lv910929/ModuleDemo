@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.lv.common.base.BasePresenter;
 import com.lv.common.entity.HttpResult;
+import com.lv.common.entity.UserEntity;
 import com.lv.common.http.ApiCallback;
 import com.lv.common.http.HttpConstant;
 import com.lv.common.utils.MyToast;
@@ -65,11 +66,11 @@ public class LoginPresenter extends BasePresenter<LoginView> implements BasePres
      * @param smsCode
      */
     public void loginReq(String phone, String smsCode) {
-        Observable<HttpResult<LoginEntity>> loginObservable = LoginBuildApi.getAPIService(context).loginReq(new LoginBody(phone, smsCode));
-        addSubscription(loginObservable, new ApiCallback<HttpResult<LoginEntity>>() {
+        Observable<HttpResult<UserEntity>> loginObservable = LoginBuildApi.getAPIService(context).loginReq(new LoginBody(phone, smsCode));
+        addSubscription(loginObservable, new ApiCallback<HttpResult<UserEntity>>() {
 
             @Override
-            public void onSuccess(HttpResult<LoginEntity> model) {
+            public void onSuccess(HttpResult<UserEntity> model) {
                 mvpView.hideLoad();
                 if (model.getStatus() == HttpConstant.SUCCESS_STATE_CODE) { //说明成功
                     MyToast.showShortToast(context, "登录成功");

@@ -2,6 +2,8 @@ package com.lv.common.data;
 
 import android.os.Environment;
 
+import com.yanzhenjie.permission.Permission;
+
 import java.util.Map;
 
 /**
@@ -25,17 +27,7 @@ public class CommConfig {
 
     public static final String DOWNLOAD_APK_NAME = "Module.apk";
 
-    //用于权限设置回调
-    public static final int REQUEST_CODE_SETTING = 300;
-    //写文件权限
-    public static final int REQUEST_WRITE_PERMISSIONS = 110;
-    //用于摄像头权限
-    public static final int REQUEST_QR_CODE_PERMISSIONS = 111;
-    //用于定位权限
-    public static final int REQUEST_LOCATION_PERMISSIONS = 112;
-    //用于获取通讯录权限
-    public static final int REQUEST_CONTACT_PERMISSIONS = 113;
-    //获取通讯录回调
-    public static final int GET_CONTACT_RESULT = 114;
+    //相册权限
+    public static final String[] PHOTO_PERMISSIONS = new String[]{Permission.CAMERA, Permission.READ_EXTERNAL_STORAGE, Permission.WRITE_EXTERNAL_STORAGE};
 
 }

@@ -9,6 +9,8 @@ public class HttpResult<T> implements Serializable {
 
     private int status;
 
+    private String opertime;
+
     private String message;
 
     private T data;
@@ -22,6 +24,14 @@ public class HttpResult<T> implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getOpertime() {
+        return opertime;
+    }
+
+    public void setOpertime(String opertime) {
+        this.opertime = opertime;
     }
 
     public String getMessage() {

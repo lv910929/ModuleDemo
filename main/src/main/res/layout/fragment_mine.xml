@@ -25,22 +25,39 @@
             app:mwhWaveHeight="40dp"
             app:mwhWaves="PairWave" />
 
-        <cn.carbs.android.avatarimageview.library.AvatarImageView
-            android:id="@+id/avatar_image_user"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_centerVertical="true"
+        <LinearLayout
+            android:id="@+id/layout_user_module"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:padding="5dp"
-            app:aiv_BoarderWidth="2dp"
-            app:aiv_ShowBoarder="true"
-            app:aiv_TextSizeRatio="0.4" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <cn.carbs.android.avatarimageview.library.AvatarImageView
+                android:id="@+id/avatar_image_user"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="10dp"
+                android:padding="5dp"
+                app:aiv_BoarderWidth="2dp"
+                app:aiv_ShowBoarder="true"
+                app:aiv_TextSizeRatio="0.4" />
+
+            <TextView
+                android:id="@+id/text_user_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="匿名"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/btn_to_setting"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:src="@drawable/icon_setting"
             android:layout_marginTop="20dp"
             android:layout_marginRight="20dp"
