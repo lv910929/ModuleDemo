@@ -89,4 +89,9 @@ dependencies {
     api deps.nativecrashreport
     api deps.tinker
 
+    //QRScan
+    api deps.zxing
+    api deps.qrcode
+    api deps.bzxing
+
 }

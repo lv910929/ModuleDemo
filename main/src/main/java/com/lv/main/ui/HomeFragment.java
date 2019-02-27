@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -14,8 +15,10 @@ import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.lv.common.base.BasePresenter;
 import com.lv.common.data.CommonPath;
 import com.lv.common.http.CommConstant;
+import com.lv.common.utils.IntentUtils;
 import com.lv.main.R;
 import com.lv.main.ui.base.BaseHomeFragment;
+
 
 /**
  * 首页
@@ -52,6 +55,7 @@ public class HomeFragment extends BaseHomeFragment<BasePresenter> implements Vie
         recyclerHome = (EasyRecyclerView) view.findViewById(R.id.recycler_home);
         setRecyclerHome(view);
         layoutSearch.setOnClickListener(this);
+        btnToScan.setOnClickListener(this);
         recyclerHome.setRefreshListener(this);
     }
 
@@ -71,7 +75,7 @@ public class HomeFragment extends BaseHomeFragment<BasePresenter> implements Vie
                     .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
                     .navigation();
         } else if (id == R.id.btn_to_scan) {
-
+            IntentUtils.navToScan();
         }
     }
 
@@ -89,4 +93,5 @@ public class HomeFragment extends BaseHomeFragment<BasePresenter> implements Vie
     public void checkLogin() {
 
     }
+
 }

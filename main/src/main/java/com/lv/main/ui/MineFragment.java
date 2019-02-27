@@ -83,7 +83,6 @@ public class MineFragment extends BaseHomeFragment<BasePresenter> implements Vie
 
     private void setRecyclerMine(View view) {
         recyclerMine.setLayoutManager(new LinearLayoutManager(getActivity()));
-
     }
 
     @Override

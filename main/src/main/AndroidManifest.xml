@@ -2,9 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lv.main">
 
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application>
 
-        <activity android:name=".ui.SplashActivity"
+        <activity
+            android:name=".ui.SplashActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,8 +17,8 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTask"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -26,15 +29,15 @@
                 <data android:scheme="lv" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.WebViewActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
         <activity
             android:name=".ui.SettingActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-
+        <activity
+            android:name=".ui.QRScanActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
     </application>
 
 </manifest>

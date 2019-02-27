@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.other.QRScanActivity">
+
+    <item
+        android:id="@+id/nav_flash"
+        android:orderInCategory="60"
+        android:title="闪光灯"
+        android:icon="@drawable/flash_on_icon"
+        app:showAsAction="ifRoom"/>
+
+</menu>

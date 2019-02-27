@@ -1,16 +1,20 @@
 package com.lv.user.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.SuperTextView;
 import com.lv.common.base.BasePresenter;
 import com.lv.common.base.SwipeBackMvpActivity;
+import com.lv.common.data.CommConfig;
 import com.lv.common.data.CommonPath;
 import com.lv.common.event.MainEvent;
 import com.lv.common.event.UserEvent;
@@ -102,11 +106,11 @@ public class UserActivity extends SwipeBackMvpActivity<BasePresenter> implements
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.super_change_avatar) {
-            requestPermission(Permission.Group.CAMERA);
+            requestPermission(CommConfig.PHOTO_PERMISSIONS);
         } else if (id == R.id.super_change_nickname) {
             showNickNameDialog();
         } else if (id == R.id.super_change_gender) {
-
+            showGenderDialog();
         } else if (id == R.id.super_change_birthday) {
 
         } else if (id == R.id.super_change_signature) {
@@ -121,8 +125,42 @@ public class UserActivity extends SwipeBackMvpActivity<BasePresenter> implements
     /**
      * 更改昵称对话框
      */
-    private void showNickNameDialog(){
+    private void showNickNameDialog() {
+        //AlertDialog.Builder builder = new AlertDialog.Builder(UserActivity.this);
+        //builder.setTitle("请填写昵称")
+    }
 
+    /**
+     * 更改性别对话框
+     */
+    private int genderChoice;
+
+    private void showGenderDialog() {
+        final String[] items = {"请选择", "男", "女"};
+        AlertDialog.Builder singleChoiceDialog = new AlertDialog.Builder(UserActivity.this);
+        singleChoiceDialog.setTitle("请选择性别");
+        //第二个参数是默认的选项
+        singleChoiceDialog.setSingleChoiceItems(items, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                genderChoice = which;
+            }
+        });
+        singleChoiceDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (genderChoice != -1) {
+                    MyToast.showShortToast(UserActivity.this, items[genderChoice]);
+                }
+            }
+        });
+        singleChoiceDialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        singleChoiceDialog.show();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)

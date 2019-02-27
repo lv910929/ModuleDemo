@@ -17,5 +17,7 @@ public class CommonPath {
     public static final String SET_ACTIVITY_PATH = "/main/SettingActivity";
     //个人资料
     public static final String USER_ACTIVITY_PATH = "/user/UserActivity";
+    //扫一扫
+    public static final String SCAN_ACTIVITY_PATH = "/main/QRScanActivity";
 
 }

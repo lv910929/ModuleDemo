@@ -1,24 +1,33 @@
 package com.lv.main.ui;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.lv.common.base.BaseMvpActivity;
 import com.lv.common.callback.HomeFragmentCallBack;
+import com.lv.common.data.CommConfig;
 import com.lv.common.data.CommonPath;
 import com.lv.common.event.MainEvent;
+import com.lv.common.permission.RuntimeRationale;
+import com.lv.common.utils.DialogUtils;
 import com.lv.main.R;
 import com.lv.main.presenter.MainPresenter;
 import com.lv.main.view.MainView;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 @Route(path = CommonPath.MAIN_ACTIVITY_PATH)
 public class MainActivity extends BaseMvpActivity<MainPresenter> implements MainView, AHBottomNavigation.OnTabSelectedListener,HomeFragmentCallBack {
@@ -44,6 +53,11 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
         setContentView(R.layout.activity_main);
         fragmentManager = getSupportFragmentManager();
         initUI();
+    }
+
+    @Override
+    protected MainPresenter createPresenter() {
+        return new MainPresenter(this, this);
     }
 
     @Override
@@ -166,12 +180,40 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
                     mineFragment.checkLogin();
                 }
                 break;
+            case 1://跳转到扫一扫
+                requestPermission(CommConfig.PHOTO_PERMISSIONS);
+                break;
         }
     }
 
-    @Override
-    protected MainPresenter createPresenter() {
-        return new MainPresenter(this, this);
+    /**
+     * Request permissions.
+     */
+    private void requestPermission(String... permissions) {
+        AndPermission.with(this)
+                .runtime()
+                .permission(permissions)
+                .rationale(new RuntimeRationale())
+                .onGranted(new Action<List<String>>() {
+                    @Override
+                    public void onAction(List<String> permissions) {
+                        //获取权限成功
+                        ARouter.getInstance()
+                                .build(CommonPath.SCAN_ACTIVITY_PATH)
+                                .withTransition(com.lv.common.R.anim.slide_in, com.lv.common.R.anim.slide_out_back)
+                                .navigation();
+                    }
+                })
+                .onDenied(new Action<List<String>>() {
+                    @Override
+                    public void onAction(@NonNull List<String> permissions) {
+                        //获取权限失败
+                        if (AndPermission.hasAlwaysDeniedPermission(MainActivity.this, permissions)) {
+                            DialogUtils.showSettingDialog(MainActivity.this, MainActivity.this.getResources().getString(R.string.camera_permission_string));
+                        }
+                    }
+                })
+                .start();
     }
 
     @Override

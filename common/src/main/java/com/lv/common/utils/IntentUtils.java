@@ -42,4 +42,9 @@ public class IntentUtils {
         EventBus.getDefault().post(new MainEvent(0, null));
     }
 
+    //跳转到扫一扫
+    public static void navToScan(){
+        EventBus.getDefault().post(new MainEvent(1, null));
+    }
+
 }
